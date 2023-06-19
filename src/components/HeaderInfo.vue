@@ -11,20 +11,12 @@ interface ApiResponse {
 
 const data = ref<ApiResponse | null>(null);
 
-const days = [
-    "воскресенье",
-    "понедельник",
-    "вторник",
-    "среда",
-    "четверг",
-    "пятница",
-    "суббота",
-] as const;
+const days = ["воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"];
 
 const weekWords = {
     1: "первой",
     2: "второй",
-} as const;
+};
 
 const now = new Date();
 

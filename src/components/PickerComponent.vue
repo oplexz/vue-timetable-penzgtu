@@ -23,9 +23,7 @@ const data = ref({});
 
 const updateContent = async () => {
     params = { ...route.params };
-    // if (Object.keys(params).length) {
     data.value = await fetchData();
-    // }
 };
 
 watch(

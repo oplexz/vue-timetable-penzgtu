@@ -30,7 +30,7 @@ const HeaderInfo = defineAsyncComponent(() => import("@/components/HeaderInfo.vu
                         <HeaderInfo />
                     </template>
                     <template #fallback>
-                        <div>Загрузка... (HeaderInfo)</div>
+                        <div class="text-xl mb-2">Загрузка...</div>
                     </template>
                 </Suspense>
             </Transition>
@@ -49,7 +49,7 @@ const HeaderInfo = defineAsyncComponent(() => import("@/components/HeaderInfo.vu
                 <Suspense>
                     <component :is="Component"></component>
                     <template #fallback>
-                        <div class="text-xl mb-2">Загрузка... (RouterView)</div>
+                        <div class="text-xl mb-2">Загрузка...</div>
                     </template>
                 </Suspense>
             </Transition>
