@@ -1,0 +1,53 @@
+<script setup lang="ts">
+import { watchEffect, ref } from "vue";
+import { RouterLink, useRoute } from "vue-router";
+import axios from "axios";
+
+const url = "http://localhost:3000/getLevels";
+
+const route = useRoute();
+
+const data = ref({});
+const fetchData = async () => {
+    const level = route.params?.level;
+
+    const data = { level };
+
+    try {
+        const response = await axios.post(url, data);
+
+        return response?.data.data;
+    } catch (error) {
+        alert(error);
+    }
+};
+
+watchEffect(async () => {
+    data.value = await fetchData();
+});
+</script>
+
+<template>
+    <main>
+        <div v-if="data">
+            <div class="text-xl mb-2">Выберите уровень образования</div>
+            <div class="flex gap-2 flex-wrap">
+                <div v-for="(name, index) in data" :key="index">
+                    <RouterLink :to="{ name: 'formpicker', params: { level: index } }">
+                        <div
+                            class="text-lg font-semibold px-6 py-2 rounded-3xl text-white bg-gradient-to-r from-cyan-500 to-blue-500"
+                        >
+                            {{ name }}
+                        </div>
+                    </RouterLink>
+                </div>
+            </div>
+        </div>
+        <div v-else>
+            <div class="text-xl mb-2">
+                Произошла ошибка при загрузке уровней образования. Попробуйте перезагрузить
+                страницу.
+            </div>
+        </div>
+    </main>
+</template>

@@ -1,0 +1,62 @@
+<script setup lang="ts">
+import { watch, ref } from "vue";
+import { RouterLink, useRoute } from "vue-router";
+import axios from "axios";
+import PickerItem from "@/components/PickerItem.vue";
+
+const url = "http://localhost:3000/getForms";
+
+const route = useRoute();
+
+let level: string;
+const data = ref({});
+
+const updateContent = async () => {
+    level = route.params.level?.toString();
+    if (level) data.value = await fetchData();
+};
+
+watch(
+    () => route.params?.level,
+    async () => await updateContent()
+);
+
+const fetchData = async () => {
+    let response;
+    const data = { level };
+
+    try {
+        response = await axios.post(url, data);
+    } catch (error) {
+        alert(error);
+    }
+    return response?.data.data;
+};
+
+await updateContent();
+</script>
+
+<template>
+    <main>
+        <div v-if="data">
+            <div class="text-xl mb-2">Выберите форму обучения</div>
+            <div class="flex gap-2 flex-wrap">
+                <div v-for="(name, index) in data" :key="index">
+                    <RouterLink
+                        :to="{
+                            name: 'typepicker',
+                            params: { level, form: index },
+                        }"
+                    >
+                        <PickerItem :name="name" />
+                    </RouterLink>
+                </div>
+            </div>
+        </div>
+        <div v-else>
+            <div class="text-xl mb-2">
+                Произошла ошибка при загрузке форм обучения. Попробуйте перезагрузить страницу.
+            </div>
+        </div>
+    </main>
+</template>
