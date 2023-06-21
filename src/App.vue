@@ -15,7 +15,7 @@ const HeaderInfo = defineAsyncComponent(() => import("@/components/HeaderInfo.vu
                 width="48"
                 height="48"
             />
-            <div class="text-2xl font-bold text-sky-600">Расписание</div>
+            <div class="text-2xl font-bold text-sky-600">Расписание занятий</div>
         </RouterLink>
         <div class="text-right font-extralight">
             <Transition
