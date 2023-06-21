@@ -3,7 +3,9 @@ import { watch, ref } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
 
-const url = "http://localhost:3000/getTimetable";
+const url = `http://${import.meta.env.VITE_APISERVER_HOST}:${
+    import.meta.env.VITE_APISERVER_PORT
+}/getTimetable`;
 
 const route = useRoute();
 
