@@ -4,7 +4,9 @@ import { useRoute } from "vue-router";
 import axios from "axios";
 import PickerList from "@/components/PickerList.vue";
 
-const baseUrl = "http://localhost:3000";
+const baseUrl = `http://${import.meta.env.VITE_APISERVER_HOST}:${
+    import.meta.env.VITE_APISERVER_PORT
+}`;
 
 const props = defineProps<{
     urlPath: string;

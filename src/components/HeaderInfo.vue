@@ -20,7 +20,9 @@ const weekWords = {
 
 const now = new Date();
 
-const url = "http://localhost:3000/getWeekNum";
+const url = `http://${import.meta.env.VITE_APISERVER_HOST}:${
+    import.meta.env.VITE_APISERVER_PORT
+}/getWeekNum`;
 
 const fetchData = async () => {
     try {
